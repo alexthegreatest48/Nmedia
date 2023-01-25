@@ -1,4 +1,4 @@
-package com.example.nmedia.dto
+package com.example.nmedia
 
 data class Post (
     val id: Int,
@@ -8,4 +8,4 @@ data class Post (
     var likedByMe: Boolean,
     var likes: Int,
     var reposts: Int
-        )
+)
