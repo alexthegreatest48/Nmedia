@@ -1,12 +1,9 @@
 package com.example.nmedia
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
-import androidx.activity.ComponentActivity
-import androidx.lifecycle.ViewModel
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nmedia.databinding.ActivityMainBinding
-import com.example.nmedia.Post
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +12,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        fun likeCount(like: Int): String{
+            val p: Int
+            var likeCount: Double = like/1000.0
+            if (likeCount % 1 == 0.0 && like>1000 && like<10000){
+                p = likeCount.toInt()
+                return p.toString() + "K"
+            }
+            if(likeCount % 1 != 0.0 && like>1000 && like<10000){
+                p = (likeCount * 10).toInt()
+                likeCount = p.toDouble() / 10
+                return likeCount.toString() + "K"
+            }
+            if(like in 10000..999999){
+                p = likeCount.toInt()
+                return p.toString() + "K"
+            }
+            if(like in 1000000..1099999){
+                likeCount = like/1000000.0
+                p = likeCount.toInt()
+                return p.toString() + "М"
+            }
+            if(like>=1100000 && likeCount % 1000 != 0.0){
+                likeCount = like/1000000.0
+                p = (likeCount * 10).toInt()
+                likeCount = p.toDouble() / 10
+                return likeCount.toString() + "М"
+            }
+            else return like.toString()
+        }
 
 
         viewModel.data.observe(this){post ->
