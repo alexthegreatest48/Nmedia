@@ -7,7 +7,7 @@ import com.example.nmedia.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel: MainViewModel by viewModels() // почему не видит viewModels?
+        val viewModel: MainViewModel by viewModels()
 
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -45,29 +45,27 @@ class MainActivity : AppCompatActivity() {
 
 
         viewModel.data.observe(this){post ->
-        with(binding) {
-            author.text = post.author
-            published.text = post.published
-            content.text = post.content
-            likes.text =  likeCount(post.likes) // Как обратиться к функции в данном случае
-            repost.text = post.reposts.toString()
-
-            if (post.likedByMe) {
-                likesButton.setImageResource(R.drawable.ic_baseline_thumb_up_24)
-            }
-
-            likesButton.setOnClickListener {
-                post.likedByMe = !post.likedByMe
-                if (post.likedByMe) post.likes++ else post.likes--
-                likesButton.setImageResource(if (post.likedByMe) R.drawable.ic_baseline_thumb_up_24 else R.drawable.ic_baseline_thumb_up_off_alt_24)
-                likes.text = likeCount(post.likes)
-            }
-
-            repostButton.setOnClickListener {
-                post.reposts++
+            with(binding) {
+                author.text = post.author
+                published.text = post.published
+                content.text = post.content
+                likes.text =  likeCount(post.likes)
                 repost.text = post.reposts.toString()
+
+                if (post.likedByMe) {
+                    likesButton.setImageResource(R.drawable.ic_baseline_thumb_up_24)
+                }
+
+                likesButton.setOnClickListener {
+                    viewModel.like()
+                    likesButton.setImageResource(if (post.likedByMe) R.drawable.ic_baseline_thumb_up_24 else R.drawable.ic_baseline_thumb_up_off_alt_24)
+                    likes.text = likeCount(post.likes)
+                }
+
+                repostButton.setOnClickListener {
+                    viewModel.repost()
+                }
             }
         }
-    }
     }
 }
