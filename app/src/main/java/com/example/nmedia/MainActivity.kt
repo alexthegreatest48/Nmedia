@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PostAdapter {
             viewModel.like(it.id)
+        }, {
             viewModel.repost(it.id)
         }
         binding.container.adapter = adapter
