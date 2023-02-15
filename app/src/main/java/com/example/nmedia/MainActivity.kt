@@ -14,16 +14,14 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: MainViewModel by viewModels()
 
-        val adapter = PostAdapter {
+        val adapter = PostAdapter ({
             viewModel.like(it.id)
         }, {
             viewModel.repost(it.id)
-        }
+        })
         binding.container.adapter = adapter
         viewModel.data.observe(this){ post ->
-            adapter.list = post
+            adapter.submitList(post)
         }
-        }
-
-
+    }
 }
