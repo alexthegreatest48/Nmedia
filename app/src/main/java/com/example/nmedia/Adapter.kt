@@ -36,10 +36,10 @@ class PostViewHolder(
             content.text = post.content
             likes.text =  likeCount(post.likes)
             repost.text = post.reposts.toString()
-            if (post.likedByMe) {
-                R.drawable.ic_baseline_thumb_up_24
-            }
-            likesButton.setOnClickListener {
+            likesButton.setImageResource(
+                if (post.likedByMe) R.drawable.ic_baseline_thumb_up_24 else R.drawable.ic_baseline_thumb_up_off_alt_24
+            )
+                        likesButton.setOnClickListener {
                 onLikeListener(post)
             }
             repostButton.setOnClickListener {
