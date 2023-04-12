@@ -2,15 +2,21 @@ package com.example.nmedia
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nmedia.databinding.CardPostBinding
 
-typealias  OnLikeListener = (post: Post) -> Unit
-typealias  OnRepostListener = (post: Post) -> Unit
+interface OnInteractionListener{
+    fun onLike(post: Post) {}
+    fun onRepost(post: Post) {}
+    fun onRemove(post: Post) {}
+    fun onEdit(post: Post) {}
+}
+typealias  onInteractionListener = (post: Post) -> Unit
 
-class PostAdapter(private val onLikeListener: OnLikeListener, private val onRepostListener: OnRepostListener) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+class PostAdapter(private val onInteractionListener: OnInteractionListener) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
@@ -20,14 +26,13 @@ class PostAdapter(private val onLikeListener: OnLikeListener, private val onRepo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener, onRepostListener)
+        return PostViewHolder(binding, onInteractionListener)
     }
 }
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onRepostListener: OnRepostListener,
+    private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root){
     fun bind(post: Post){
         binding.apply{
@@ -39,12 +44,32 @@ class PostViewHolder(
             likesButton.setImageResource(
                 if (post.likedByMe) R.drawable.ic_baseline_thumb_up_24 else R.drawable.ic_baseline_thumb_up_off_alt_24
             )
-                        likesButton.setOnClickListener {
-                onLikeListener(post)
+            likesButton.setOnClickListener {
+                onInteractionListener.onLike(post)
             }
             repostButton.setOnClickListener {
-                onRepostListener(post)
+                onInteractionListener.onRepost(post)
             }
+
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.menu)
+                    setOnMenuItemClickListener { item->
+                        when(item.itemId){
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
+
         }
     }
 

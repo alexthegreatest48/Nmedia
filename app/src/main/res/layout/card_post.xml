@@ -27,7 +27,8 @@
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="@sample/post.json/data/author" />
+        tools:text="@sample/post.json/data/author"
+        />
 
     <TextView
         android:id="@+id/published"
