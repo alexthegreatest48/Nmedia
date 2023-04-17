@@ -19,7 +19,7 @@
         android:id="@+id/toolsTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
+        app:barrierDirection="top"
         app:constraint_referenced_ids="content,save" />
 
     <EditText
@@ -44,5 +44,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/content"
         app:srcCompat="@drawable/ic_baseline_save_24" />
+
+    <ImageButton
+        android:id="@+id/cancel"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@id/save"
+        app:layout_constraintEnd_toEndOf="@id/save"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_baseline_cancel_24" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="4dp"
+        android:layout_height="312dp"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="cancel"
+        app:srcCompat="@drawable/ic_baseline_cancel_24" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

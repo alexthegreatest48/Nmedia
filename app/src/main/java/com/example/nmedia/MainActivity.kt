@@ -1,6 +1,7 @@
 package com.example.nmedia
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onRemove(post: Post) {
                 viewModel.remove(post.id)
+                binding.content.setText("")
+                binding.content.clearFocus()
+                binding.group.visibility = View.INVISIBLE
             }
         })
 
@@ -39,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             if (post.id == 0L) {
                 return@observe
             }
+            binding.group.visibility = View.VISIBLE
             with(binding.content) {
                 requestFocus()
                 setText(post.content)
@@ -62,6 +67,12 @@ class MainActivity : AppCompatActivity() {
                 setText("")
                 clearFocus()
             }
+        }
+
+        binding.cancel.setOnClickListener {
+            binding.content.setText("")
+            binding.content.clearFocus()
+            binding.group.visibility = View.INVISIBLE
         }
     }
 }
