@@ -40,14 +40,14 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="@sample/post.json/data/published" />
 
-    <ImageButton
+    <Button
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.AppTheme.LikeCheckBox"/>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierTop"
@@ -85,26 +85,17 @@
         style="@style/Widget.AppTheme.LikeCheckBox"/>
 
 
-    <ImageButton
+    <Button
         android:id="@+id/repostButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_send_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/likesButton"
-        app:layout_constraintTop_toBottomOf="@id/barrierBottom" />
+        app:layout_constraintTop_toBottomOf="@id/barrierBottom"
+        app:icon="@drawable/ic_baseline_send_24"
+        tools:text="@sample/post.json/data/repost"
+        style="@style/Widget.AppTheme.RepostButton"/>
 
-    <TextView
-        android:id="@+id/repost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/repostButton"
-        app:layout_constraintStart_toEndOf="@id/repostButton"
-        app:layout_constraintTop_toTopOf="@id/repostButton"
-        tools:text="@sample/post.json/data/repost" />
 
     <ImageButton
         android:id="@+id/viewButton"

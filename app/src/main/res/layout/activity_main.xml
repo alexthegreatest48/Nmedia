@@ -8,11 +8,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/toolsTop"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/card_post" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -30,10 +30,10 @@
         android:hint="@string/post_text"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
-        android:padding="@dimen/common_spacing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/save"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <ImageButton
         android:id="@+id/save"
@@ -43,7 +43,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/content"
-        app:srcCompat="@drawable/ic_baseline_save_24" />
+        app:srcCompat="@drawable/ic_baseline_save_24"
+        />
 
     <ImageButton
         android:id="@+id/cancel"
@@ -57,11 +58,9 @@
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
-        android:layout_width="4dp"
-        android:layout_height="312dp"
-        android:visibility="invisible"
-        app:constraint_referenced_ids="cancel"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="cancel" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

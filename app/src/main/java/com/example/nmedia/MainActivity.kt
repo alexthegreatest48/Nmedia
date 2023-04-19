@@ -27,16 +27,18 @@ class MainActivity : AppCompatActivity() {
 
             override fun onRemove(post: Post) {
                 viewModel.remove(post.id)
-                binding.content.setText("")
-                binding.content.clearFocus()
-                binding.group.visibility = View.INVISIBLE
             }
         })
 
         binding.container.adapter = adapter
 
         viewModel.data.observe(this) { post ->
-            adapter.submitList(post)
+            val newPost = adapter.currentList.size < post.size
+            adapter.submitList(post) {
+                if (newPost) {
+                    binding.container.smoothScrollToPosition(0)
+                }
+            }
         }
 
         viewModel.edited.observe(this) { post ->

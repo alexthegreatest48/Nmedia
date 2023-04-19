@@ -40,7 +40,8 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
             likesButton.text =  likeCount(post.likes)
-            repost.text = post.reposts.toString()
+            likesButton.isChecked = post.likedByMe
+            repostButton.text = post.reposts.toString()
             likesButton.setOnClickListener {
                 onInteractionListener.onLike(post)
             }

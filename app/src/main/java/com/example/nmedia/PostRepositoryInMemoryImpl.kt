@@ -50,16 +50,24 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun save(posts: Post) {
         var nextId = post.size
         var nextID = nextId.toLong()
-        post = listOf(
-            posts.copy(
-                id = nextID++,
-                author = "Me",
-                likedByMe = false,
-                published = "now"
-            )
-        ) + post
+        if (posts.id == 0L) {
+            // TODO: remove hardcoded author & published
+            post = listOf(
+                posts.copy(
+                    id = nextID++,
+                    author = "Me",
+                    likedByMe = false,
+                    published = "now"
+                )
+            ) + post
+            data.value = post
+            return
+        }
+
+        post = post.map {
+            if (it.id != posts.id) it else it.copy(content = posts.content)
+        }
         data.value = post
-        return
     }
 
     override fun edit(post: Post) {
