@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="buttonTint">@color/like_checkbox_tint</item>
+        <item name="iconTint">@color/like_checkbox_tint</item>
         <item name="android:paddingStart">@dimen/common_spacing</item>
     </style>
 
     <style name="Widget.AppTheme.RepostButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="buttonTint">@color/button_tint</item>
+        <item name="iconTint">@color/button_tint</item>
         <item name="android:paddingStart">@dimen/common_spacing</item>
     </style>
 </resources>
