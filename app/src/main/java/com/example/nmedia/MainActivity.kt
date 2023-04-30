@@ -1,6 +1,9 @@
 package com.example.nmedia
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity.apply
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -28,6 +31,18 @@ class MainActivity : AppCompatActivity() {
             override fun onRemove(post: Post) {
                 viewModel.remove(post.id)
             }
+
+            override fun onVideo(post: Post) {
+                val webpage: Uri = Uri.parse(post.videoLink)
+                val intent = Intent().apply{
+                    action = Intent.ACTION_VIEW
+                    putExtra(Intent.ACTION_VIEW, webpage)
+                }
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+            }
+
         })
 
         binding.container.adapter = adapter
@@ -76,5 +91,6 @@ class MainActivity : AppCompatActivity() {
             binding.content.clearFocus()
             binding.group.visibility = View.INVISIBLE
         }
+
     }
 }

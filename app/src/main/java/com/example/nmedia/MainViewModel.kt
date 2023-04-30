@@ -10,7 +10,8 @@ private val empty = Post(
     likedByMe = false,
     published = "",
     likes = 0,
-    reposts = 0
+    reposts = 0,
+    videoLink = "https://youtu.be/dQw4w9WgXcQ"
 )
 
 class MainViewModel: ViewModel() {

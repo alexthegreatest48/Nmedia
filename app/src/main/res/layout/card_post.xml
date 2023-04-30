@@ -118,5 +118,29 @@
         app:layout_constraintTop_toTopOf="@id/viewButton"
         app:layout_constraintBottom_toBottomOf="@id/viewButton"/>
 
+    <ImageView
+        android:id="@+id/video_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        tools:srcCompat="@mipmap/ic_video"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toTopOf="@id/barrierBottom"
+        />
+
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_baseline_play_circle_outline_24"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="@id/video_image"
+        app:layout_constraintBottom_toBottomOf="@id/video_image"
+        app:layout_constraintStart_toStartOf="@id/video_image"
+        app:layout_constraintEnd_toEndOf="@id/video_image"
+        />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

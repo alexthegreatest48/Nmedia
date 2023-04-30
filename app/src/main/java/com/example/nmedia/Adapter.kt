@@ -13,6 +13,7 @@ interface OnInteractionListener{
     fun onRepost(post: Post) {}
     fun onRemove(post: Post) {}
     fun onEdit(post: Post) {}
+    fun onVideo(post: Post) {}
 }
 typealias  onInteractionListener = (post: Post) -> Unit
 
@@ -66,6 +67,14 @@ class PostViewHolder(
                         }
                     }
                 }.show()
+            }
+
+            videoImage.setOnClickListener {
+                onInteractionListener.onVideo(post)
+            }
+
+            playButton.setOnClickListener {
+                onInteractionListener.onVideo(post)
             }
 
         }
