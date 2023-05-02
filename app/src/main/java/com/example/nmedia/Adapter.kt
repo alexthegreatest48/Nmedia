@@ -1,6 +1,7 @@
 package com.example.nmedia
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -43,6 +44,15 @@ class PostViewHolder(
             likesButton.text =  likeCount(post.likes)
             likesButton.isChecked = post.likedByMe
             repostButton.text = post.reposts.toString()
+
+            if (post.videoLink == null) {
+                videoImage.visibility = View.INVISIBLE
+            }
+
+            if (post.videoLink == null) {
+                playButton.visibility = View.INVISIBLE
+            }
+
             likesButton.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
@@ -70,11 +80,15 @@ class PostViewHolder(
             }
 
             videoImage.setOnClickListener {
-                onInteractionListener.onVideo(post)
+                    onInteractionListener.onVideo(post)
             }
 
             playButton.setOnClickListener {
-                onInteractionListener.onVideo(post)
+                if (post.videoLink != null) {
+                    onInteractionListener.onVideo(post)
+                } else {
+                    playButton.visibility = View.INVISIBLE
+                }
             }
 
         }

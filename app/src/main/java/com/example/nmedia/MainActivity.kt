@@ -34,15 +34,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onVideo(post: Post) {
                 val webpage: Uri = Uri.parse(post.videoLink)
-                val intent = Intent().apply{
-                    action = Intent.ACTION_VIEW
-                    putExtra(Intent.ACTION_VIEW, webpage)
-                }
+                val intent = Intent(Intent.ACTION_VIEW, webpage)
                 if (intent.resolveActivity(packageManager) != null) {
                     startActivity(intent)
                 }
             }
-
         })
 
         binding.container.adapter = adapter
@@ -66,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                 setText(post.content)
             }
         }
+
 
         binding.save.setOnClickListener {
             with(binding.content) {

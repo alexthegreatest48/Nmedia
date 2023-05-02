@@ -23,7 +23,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
         likedByMe = false,
         likes = 1599999,
         reposts = 100,
-                "https://youtu.be/dQw4w9WgXcQ"
+            videoLink = null
     ),
         Post (
             id = 2,
@@ -54,7 +54,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
         var nextId = post.size
         var nextID = nextId.toLong()
         if (posts.id == 0L) {
-            // TODO: remove hardcoded author & published
             post = listOf(
                 posts.copy(
                     id = nextID++,
