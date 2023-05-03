@@ -1,5 +1,7 @@
 package com.example.nmedia
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -11,11 +13,13 @@ private val empty = Post(
     published = "",
     likes = 0,
     reposts = 0,
-    videoLink = "https://youtu.be/dQw4w9WgXcQ"
+    videoLink = null
 )
 
-class MainViewModel: ViewModel() {
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+//    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+//    private val repository: PostRepository = PostRepositorySharedPrefImpl(application)
+    private val repository: PostRepository = PostRepositoryFileImpl(application)
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
     fun likeById(id: Long) = repository.likeById(id)

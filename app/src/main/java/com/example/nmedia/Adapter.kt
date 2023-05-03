@@ -115,13 +115,12 @@ class PostViewHolder(
             p = likeCount.toInt()
             return p.toString() + "М"
         }
-        if(like>=1100000 && likeCount % 1000 != 0.0){
+        return if(like>=1100000 && likeCount % 1000 != 0.0){
             likeCount = like/1000000.0
             p = (likeCount * 10).toInt()
             likeCount = p.toDouble() / 10
-            return likeCount.toString() + "М"
-        }
-        else return like.toString()
+            likeCount.toString() + "М"
+        } else like.toString()
     }
 }
 
